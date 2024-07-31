@@ -1,0 +1,256 @@
+
+* {
+  font-family: "Outfit", sans-serif;
+}
+
+
+body {
+  margin: 0;
+  font-family: "Times New Roman", Times, serif;
+  background-color: #ced4da;
+  background-image: url("/images/image5.webp");
+  background-repeat: no-repeat;
+  background-size: cover;
+  
+}
+
+
+
+
+.navbar {
+  background-color: #adb5bd;
+  overflow: hidden;
+}
+
+.navbar a {
+  display: flex;
+  display: block;
+  color: rgb(112 48 66);
+  text-align: center;
+  padding: 14px 20px;
+  text-decoration: none;
+}
+
+.navbar a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.navbar a.active {
+  background-color: #adb5bd;
+}
+
+#navbar {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+}
+
+/* Logo and images */
+#logo {
+  margin: 10px 30px;
+  height: 200px;
+}
+
+#logo img {
+  margin: 4px 4px;
+  height: 100%;
+  width: 100%;
+  object-fit: contain;
+  color :white;
+}
+
+/* Navigation bar: list styling */
+
+#navbar ul {
+  display: flex;
+}
+
+#navbar ul li {
+  list-style: none;
+  font-size: 2rem;
+}
+
+
+#navbar::before {
+  content: "";
+  background-color: black;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0px;
+  left: 0px;
+  z-index: -1;
+  opacity: 0.2;
+}
+
+
+#navbar ul li a:hover,
+#navbar ul li a:active {
+  color: rgb(48, 36, 36);
+}
+
+#navbar ul li a {
+  display: block;
+  padding: 4px 22px;
+  border-radius: 20px;
+  text-decoration: none;
+  color: rgb(255 255 255);
+  font-weight: 400;
+}
+
+
+
+
+body{
+  background-color:#b9ad9d;
+  }
+  .container{
+  justify-content:center;
+  text-align:center;
+  border:4px solid #fffbfb;
+  display: block;
+  margin:auto;
+  width:600px;
+  height:cover;
+  margin-top: 50px;
+  }
+
+
+  input{
+  padding:5px;
+  margin:2px auto;
+  }
+  .container #date input{
+      padding:5px 30px;
+  }
+
+  h1{
+  text-align:center;
+  color:#ddd;
+  margin-top: 130px;
+  }
+  
+      
+  body {
+    margin: 0;
+    font-family: 'Times New Roman', Times, serif;
+    position: relative; /* Necessary for positioning pseudo-element */
+}
+
+body::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url("gymbk3.jpeg") no-repeat center center/cover;
+    z-index: -1;
+    opacity: 0.6;
+}
+
+
+.navbar {
+  background-color: #333;
+  overflow: hidden;
+}
+
+.navbar a {
+    display:flex;
+  display: block;
+  color: rgb(112 48 66);
+  text-align: center;
+  padding: 14px 20px;
+  text-decoration: none;
+}
+
+.navbar a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.navbar a.active {
+  background-color: #666;
+}
+
+
+#navbar {
+display: flex;
+align-items: center;
+position: absolute;
+top: 0px;
+left: 0px;
+width: 100%;
+}
+
+/* Logo and images */
+#logo {
+margin: 10px 30px;
+}
+
+#logo img {
+margin: 4px 4px;
+height: 100px;
+}
+
+/* Navigation bar: list styling */
+
+
+#navbar ul {
+display: flex;
+}
+
+#navbar ul li {
+list-style: none;
+font-size: 1.5rem;
+}
+
+#navbar ul li a {
+display: block;
+padding: 4px 22px;
+border-radius: 20px;
+text-decoration: none;
+color: rgb(255, 255, 255);
+font-weight: 400;
+}
+
+#navbar::before {
+content: "";
+background-color: black;
+position: absolute;
+height: 100%;
+width: 100%;
+top: 0px;
+left: 0px;
+z-index: -1;
+opacity: 0.2;
+}
+
+
+#navbar ul li a:hover {
+color: rgb(34 45 34 / 77%);
+
+}
+
+
+h3{
+  font-size: 2rem;
+  padding: 12px;
+  color:#fbfbfb;
+  font-family: 'Times New Roman', Times, serif;
+}
+
+    #contactus{
+      position:relative;
+      top:110px;
+ }
+
+ .container{
+      position:relative;
+      top:120px;
+      background-color: #373738;
+ }

@@ -1,0 +1,160 @@
+
+* {
+  font-family: "Outfit", sans-serif;
+}
+
+
+body {
+  margin: 0;
+  font-family: "Times New Roman", Times, serif;
+  background-color: #ced4da;
+  background-image: url("/images/image5.webp");
+  background-repeat: no-repeat;
+  background:cover ;
+  background-size: cover;
+  
+}
+
+
+
+
+.navbar {
+  background-color: #adb5bd;
+  overflow: hidden;
+}
+
+.navbar a {
+  display: flex;
+  display: block;
+  color: rgb(112 48 66);
+  text-align: center;
+  padding: 14px 20px;
+  text-decoration: none;
+}
+
+.navbar a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.navbar a.active {
+  background-color: #adb5bd;
+}
+
+#navbar {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+}
+
+/* Logo and images */
+#logo {
+  margin: 10px 30px;
+  height: 200px;
+}
+
+#logo img {
+  margin: 4px 4px;
+  height: 100%;
+  width: 100%;
+  object-fit: contain;
+  color :white;
+}
+
+/* Navigation bar: list styling */
+
+#navbar ul {
+  display: flex;
+}
+
+#navbar ul li {
+  list-style: none;
+  font-size: 2rem;
+}
+
+
+#navbar::before {
+  content: "";
+  background-color: black;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0px;
+  left: 0px;
+  z-index: -1;
+  opacity: 0.2;
+}
+
+
+#navbar ul li a:hover,
+#navbar ul li a:active {
+  color: rgb(48, 36, 36);
+}
+
+#navbar ul li a {
+  display: block;
+  padding: 4px 22px;
+  border-radius: 20px;
+  text-decoration: none;
+  color: rgb(255 255 255);
+  font-weight: 400;
+}
+
+
+
+.add {
+  height: 90vh;
+  width: 99%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top:120px;
+  color:white;
+}
+
+.add form{
+  width: 400px;
+  border-radius: 12px;
+  box-shadow: 0px 40px 24px #9d9d9d66;
+  overflow: hidden;
+  border: 1px rgba(0, 0, 0, 0.107) solid;
+  padding: 20px;
+  padding-top: 30px;
+  background: whitesmoke;
+  color: black;
+}
+
+form input{
+  padding: 10px;
+  border-radius: 10px;
+  outline: none;
+  border: none;
+  width: 90%;
+  margin: 8px;
+  margin-bottom: 20px;
+
+}
+
+form label{
+  font-family: "Outfit", sans-serif;
+  font-size: 12px;
+}
+
+
+
+
+.submit {
+  color: white;
+  text-align: center;
+  background-color: rgb(22 21 32 / 77%);
+  padding: 10px 40px;
+  border: none;
+  font-size: 1rem;
+  margin: auto;
+  text-align: center;
+  border-radius: 12px;
+  display: block;
+}

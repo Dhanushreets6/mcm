@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MyCaseManager</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="/client/css/case.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      /* External CSS */
+      .display-none {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- HTML for Navigation Bar -->
+    <div class="navbar">
+      <nav id="navbar">
+        <div id="logo">
+          <h5 style="color:white;">MyCaseManager</h5>
+          <img
+            src="/images/mcmlogo.png"
+            alt="carImage"
+            height="100px"
+            width="100px"
+          />
+        </div>
+        <ul>
+          <li class="items"><a href="/client/html/home.html">Home</a></li>
+          <li class="items"><a href="/client/html/about.html">About</a></li>
+          <li class="items"><a href="/client/html/contact.html">Contact</a></li>
+          <li
+            class="items"
+            style="position: absolute; right: 0px; font-size: 2rem"
+          >
+            <a href="login.html">Login</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+
+    <div class="btn-create">
+      <a href="/client/html/create.html">+</a>
+    </div>
+
+    <div class="srch">
+      <input
+        type="text"
+        name="textsrch"
+        id="textsrch"
+        placeholder="Enter caseNumber to search"
+      />
+      <div class="src-btn">
+        <img
+          id="srch-symbol"
+          src="/images/find.png"
+          style="width: 100%; height: 100%"
+        />
+      </div>
+    </div>
+
+    <div class="case-boxes">
+      <div class="case-header">
+        <div class="boxh">Dates</div>
+        <div class="boxh">Case Number</div>
+        <div class="boxh">Party Name</div>
+        <div class="boxh">Status</div>
+        <div class="boxh">Update</div>
+      </div>
+      <div class="container"></div>
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", async () => {
+        let data;
+        try {
+          const res = await fetch("http://localhost:3000", {
+            method: "GET",
+            mode: "cors",
+            headers: { "Content-Type": "application/json" },
+          });
+          const rsult = await res.json();
+          console.log(rsult.data);
+          data = rsult.data;
+          const parentNode = document.querySelector(".container");
+
+          const dateGenerator = (date) => {
+            const newDate = new Date(date);
+            return `${newDate.getDate()}-${
+              newDate.getMonth() + 1
+            }-${newDate.getFullYear()}`;
+          };
+
+          data.sort((a, b) => {
+            return new Date(a.date) - new Date(b.date);
+          });
+          data.forEach((element) => {
+            const newTag = document.createElement("div");
+            newTag.className = "case-box";
+            newTag.innerHTML = `
+                        <div class="box caseDate">${
+                          dateGenerator(element.date) || "anonymous"
+                        }</div>
+                        <div class="box caseNumber">${
+                          element.caseNumber || "anonymous"
+                        }</div>
+                        <div class="box partyName">${
+                          element.partyName || "anonymous"
+                        }</div>
+                        <div class="box caseStatus">${
+                          element.status || "anonymous"
+                        }</div>
+                        <div class="box update">
+                            <div class="checkbox">
+                                <input type="checkbox" class="imp" value="important"><br>
+                            </div>
+                            <div class="btns">
+                                <button class="edit" title=${
+                                  element.caseNumber
+                                }>Edit</button>
+                                <button class="delete" title=${
+                                  element.caseNumber
+                                }>Delete</button>
+                            </div>
+                        </div>
+                    `;
+            parentNode.appendChild(newTag);
+          });
+        } catch (e) {
+          console.log(e);
+        }
+
+        const deleteArr = document.querySelectorAll(".delete");
+        const editArr = document.querySelectorAll(".edit");
+
+        deleteArr.forEach((element) => {
+          element.addEventListener("click", async (e) => {
+            console.log(e.target.title);
+            try {
+              const res = await fetch("http://localhost:3000/delete", {
+                method: "POST",
+                mode: "cors",
+                body: JSON.stringify({ caseNumber: e.target.title }),
+                headers: { "Content-Type": "application/json" },
+              });
+              const das = await res.json();
+              console.log(das);
+              window.location.reload();
+            } catch (e) {
+              console.log(e);
+            }
+          });
+        });
+
+        editArr.forEach((element) => {
+          element.addEventListener("click", (e) => {
+            const caseBox = e.target.closest(".case-box");
+            const caseNumber = e.target.title;
+            const caseData = data.find(
+              (item) => item.caseNumber === caseNumber
+            );
+            if (caseData) {
+              const date = new Date(caseData.date).toISOString().split("T")[0];
+              const partyName = caseData.partyName;
+              const status = caseData.status;
+
+              caseBox.innerHTML = `
+                            <div class="box">
+                                <input type="date" class="editDate" value="${date}">
+                            </div>
+                            <div class="box">
+                                ${caseNumber}
+                            </div>
+                            <div class="box">
+                                <input type="text" class="editPartyName" value="${partyName}">
+                            </div>
+                            <div class="box">
+                                <input type="text" class="editStatus" value="${status}">
+                            </div>
+                            <div class="box update">
+                                <div class="checkbox">
+                                    <input type="checkbox" class="imp" value="important"><br>
+                                </div>
+                                <div class="btns">
+                                    <button class="save" title=${caseNumber}>Save</button>
+                                    <button class="cancel" title=${caseNumber}>Cancel</button>
+                                </div>
+                            </div>
+                        `;
+
+              const saveButton = caseBox.querySelector(".save");
+              const cancelButton = caseBox.querySelector(".cancel");
+
+              saveButton.addEventListener("click", async (e) => {
+                const updatedDate = caseBox.querySelector(".editDate").value;
+                const updatedPartyName =
+                  caseBox.querySelector(".editPartyName").value;
+                const updatedStatus =
+                  caseBox.querySelector(".editStatus").value;
+                const caseNo =
+                  e.target.parentNode.parentNode.parentNode.childNodes[3]
+                    .innerHTML;
+                console.log(caseNo.trim());
+                try {
+                  const updatedCase = {
+                    date: updatedDate,
+                    partyName: updatedPartyName,
+                    status: updatedStatus,
+                    casenumber: caseNo.trim(),
+                  };
+
+                  const res = await fetch("http://localhost:3000/update", {
+                    method: "POST",
+                    mode: "cors",
+                    body: JSON.stringify({ ...updatedCase }),
+                    headers: { "Content-Type": "application/json" },
+                  });
+                  const result = await res.json();
+                  console.log(result);
+                  window.location.reload();
+                } catch (e) {
+                  console.log(e);
+                }
+              });
+
+              cancelButton.addEventListener("click", () => {
+                caseBox.innerHTML = `
+                                <div class="box caseDate">${
+                                  dateGenerator(caseData.date) || "anonymous"
+                                }</div>
+                                <div class="box caseNumber">${
+                                  caseNumber || "anonymous"
+                                }</div>
+                                <div class="box partyName">${
+                                  partyName || "anonymous"
+                                }</div>
+                                <div class="box caseStatus">${
+                                  status || "anonymous"
+                                }</div>
+                                <div class="box update">
+                                    <div class="checkbox">
+                                        <input type="checkbox" class="imp" value="important"><br>
+                                    </div>
+                                    <div class="btns">
+                                        <button class="edit" title=${caseNumber}>Edit</button>
+                                        <button class="delete" title=${caseNumber}>Delete</button>
+                                    </div>
+                                </div>
+                            `;
+                // Reassign event listeners after canceling
+                assignEventListeners();
+              });
+            }
+          });
+        });
+
+        const search = document.querySelector("#srch-symbol");
+        search.addEventListener("click", () => {
+          const dateGenerator = (date) => {
+            const newDate = new Date(date);
+
+            return `${newDate.getDate()}-${newDate.getMonth()}-${newDate.getFullYear()}`;
+          };
+          const inputData = document.querySelector("#textsrch").value;
+          const newArr = data.filter((obj) => obj.caseNumber === inputData);
+          console.log(newArr);
+          const parentNode = document.querySelector(".container");
+          parentNode.classList.add("display-none");
+
+          const parent = document.querySelector(".case-boxes");
+          newArr.forEach((element) => {
+            const div = document.createElement("div");
+            div.className = "case-box";
+            div.innerHTML = `
+                    <div class="box caseDate">${
+                      dateGenerator(element.date) || "anonymous"
+                    }</div>
+                    <div class="box">${element.caseNumber || "anonymous"}</div>
+                    <div class="box">${element.partyName || "anonymous"}</div>
+                    <div class="box caseStatus">${
+                      element.status || "anonymous"
+                    }</div>
+                    <div class="box" class="update">
+                        <div class="checkbox">
+                            <input type="checkbox" class="imp" value="important"></br>
+                        </div>
+                        <div class="btns"><button class="edit" title = ${
+                          element.caseNumber
+                        }>Edit</button> 
+                            <button class="delete" title = ${
+                              element.caseNumber
+                            }>Delete</button> 
+                            </div>
+                    </div>
+                `;
+            // console.log(parent.lastElementChild.childNodes[2].childNodes[3].innerHTML)
+            console.log(inputData);
+            if (
+              parent.lastElementChild.childNodes[2].childNodes[3].value !==
+              inputData
+            )
+              parent.appendChild(div);
+            else return;
+          });
+        });
+      });
+
+      // const search = document.querySelector('#srch-symbol');
+      // search.addEventListener('click', () => {
+      //     const inputData = document.querySelector("#textsrch").value;
+      //     console.log(inputData)
+      //     const newArr = data.filter(obj => obj.caseNumber === inputData);
+      //     console.log(newArr);
+      //     const parentNode = document.querySelector('.container');
+      //     parentNode.classList.add("display-none");
+
+      //     const parent = document.querySelector('.case-boxes');
+      //     newArr.forEach(element => {
+      //         const div = document.createElement('div');
+      //         div.className = "case-box";
+      //         div.innerHTML = `
+      //         <div class="box caseDate">${dateGenerator(element.date) || "anonymous"}</div>
+      //         <div class="box">${element.caseNumber || "anonymous"}</div>
+      //         <div class="box">${element.partyName || "anonymous"}</div>
+      //         <div class="box caseStatus">${element.status || "anonymous"}</div>
+      //         <div class="box update">
+      //             <div class="checkbox">
+      //                 <input type="checkbox" class="imp" value="important"><br>
+      //             </div>
+      //             <div class="btns"><button class="edit" title=${element.caseNumber}>Edit</button>
+      //                 <button class="delete" title=${element.caseNumber}>Delete</button>
+      //             </div>
+      //         </div>
+      //         `;
+      //         if (parent.lastElementChild.childNodes[2].childNodes[3].value !== inputData)
+      //             parent.appendChild(div);
+      //         else
+      //             return;
+      //     });
+      //     assignEventListeners();
+      // });
+
+      function assignEventListeners() {
+        const deleteArr = document.querySelectorAll(".delete");
+        const editArr = document.querySelectorAll(".edit");
+
+        deleteArr.forEach((element) => {
+          element.addEventListener("click", async (e) => {
+            console.log(e.target.title);
+            try {
+              const res = await fetch("http://localhost:3000/delete", {
+                method: "POST",
+                mode: "cors",
+                body: JSON.stringify({ caseNumber: e.target.title }),
+                headers: { "Content-Type": "application/json" },
+              });
+              const das = await res.json();
+              console.log(das);
+              window.location.reload();
+            } catch (e) {
+              console.log(e);
+            }
+          });
+        });
+
+        editArr.forEach((element) => {
+          element.addEventListener("click", (e) => {
+            const caseBox = e.target.closest(".case-box");
+            const caseNumber = e.target.title;
+            const caseData = data.find(
+              (item) => item.caseNumber === caseNumber
+            );
+            if (caseData) {
+              const date = new Date(caseData.date).toISOString().split("T")[0];
+              const partyName = caseData.partyName;
+              const status = caseData.status;
+
+              caseBox.innerHTML = `
+                                <div class="box">
+                                    <input type="date" class="editDate" value="${date}">
+                                </div>
+                                <div class="box">
+                                    ${caseNumber}
+                                </div>
+                                <div class="box">
+                                    <input type="text" class="editPartyName" value="${partyName}">
+                                </div>
+                                <div class="box">
+                                    <input type="text" class="editStatus" value="${status}">
+                                </div>
+                                <div class="box update">
+                                    <div class="checkbox">
+                                        <input type="checkbox" class="imp" value="important"><br>
+                                    </div>
+                                    <div class="btns">
+                                        <button class="save" title=${caseNumber}>Save</button>
+                                        <button class="cancel" title=${caseNumber}>Cancel</button>
+                                    </div>
+                                </div>
+                            `;
+
+              const saveButton = caseBox.querySelector(".save");
+              const cancelButton = caseBox.querySelector(".cancel");
+
+              saveButton.addEventListener("click", async () => {
+                const updatedDate = caseBox.querySelector(".editDate").value;
+                const updatedPartyName =
+                  caseBox.querySelector(".editPartyName").value;
+                const updatedStatus =
+                  caseBox.querySelector(".editStatus").value;
+
+                try {
+                  const updatedCase = {
+                    date: updatedDate,
+                    partyName: updatedPartyName,
+                    status: updatedStatus,
+                  };
+
+                  const res = await fetch("http://localhost:3000/update", {
+                    method: "POST",
+                    mode: "cors",
+                    body: JSON.stringify({ caseNumber, ...updatedCase }),
+                    headers: { "Content-Type": "application/json" },
+                  });
+                  const result = await res.json();
+                  console.log(result);
+                  window.location.reload();
+                } catch (e) {
+                  console.log(e);
+                }
+              });
+
+              cancelButton.addEventListener("click", () => {
+                caseBox.innerHTML = `
+                                    <div class="box caseDate">${
+                                      dateGenerator(caseData.date) ||
+                                      "anonymous"
+                                    }</div>
+                                    <div class="box caseNumber">${
+                                      caseNumber || "anonymous"
+                                    }</div>
+                                    <div class="box partyName">${
+                                      partyName || "anonymous"
+                                    }</div>
+                                    <div class="box caseStatus">${
+                                      status || "anonymous"
+                                    }</div>
+                                    <div class="box update">
+                                        <div class="checkbox">
+                                            <input type="checkbox" class="imp" value="important"><br>
+                                        </div>
+                                        <div class="btns">
+                                            <button class="edit" title=${caseNumber}>Edit</button>
+                                            <button class="delete" title=${caseNumber}>Delete</button>
+                                        </div>
+                                    </div>
+                                `;
+                // Reassign event listeners after canceling
+                assignEventListeners();
+              });
+            }
+          });
+        });
+      }
+    </script>
+  </body>
+</html>

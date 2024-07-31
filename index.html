@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MyCaseManager</title>
+    <link rel="stylesheet" href="/client/css/index.css">
+    <link rel="stylesheet" href="/client/css/login.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<!-- Navigation Bar -->
+<div class="navbar">
+    <nav>
+        <div id="logo">
+            <img src="/images/logo2.jpeg" alt="carImage" height="100px" width="100px">
+        </div>
+        <ul>
+            <li class="nav-item"><a href="/client/html/home.html">Home</a></li>
+            <li class="nav-item"><a href="/client/html/about.html">About</a></li>
+            <li class="nav-item"><a href="/client/html/contact.html">Contact</a></li>
+           
+        </ul>
+    </nav>
+</div>
+
+<!-- Welcome Message -->
+<div class="welcome-container">
+    <h4>Welcome to ' MyCaseManager ' WebApp</h4>
+</div>
+
+<!-- Main Content Area -->
+<div class="main-content">
+    <div class="login-container">
+        <!-- Login Form -->
+        <div id="login-form" onsubmit="return validateLogin()">
+            <h2>Welcome Back!</h2>
+            <form>
+                <div>
+                    <label for="login-email">Email</label>
+                    <input type="email" id="login-email" placeholder="Enter your email">
+                </div>
+                <div>
+                    <label for="login-password">Password</label>
+                    <input type="password" id="login-password" placeholder="Enter your password">
+                </div>
+                <div>
+                    <label>
+                        <input type="checkbox" id="remember-me">
+                        <span>Remember me</span>
+                    </label>
+                    <a href="#">Forgot password?</a>
+                </div>
+                <button type="button" onclick="navigateToHomePage()">Login</button>
+            </form>
+            <p>Don't have an account? <button onclick="toggleForm()">Sign up</button></p>
+        </div>
+
+        <!-- Sign Up Form -->
+        <div id="signup-form" class="hidden">
+            <h2>Create an Account</h2>
+            <form>
+                <div>
+                    <label for="signup-name">Name</label>
+                    <input type="text" id="signup-name" placeholder="Enter your name">
+                </div>
+                <div>
+                    <label for="signup-no">Phone Number</label>
+                    <input type="number" id="signup-no" placeholder="Enter your phone number">
+                </div>
+                <div>
+                    <label for="signup-email">Email</label>
+                    <input type="email" id="signup-email" placeholder="Enter your email">
+                </div>
+                <div>
+                    <label for="signup-password">Password</label>
+                    <input type="password" id="signup-password" placeholder="Enter your password">
+                </div>
+                <div>
+                    <label for="confirm-password">Confirm Password</label>
+                    <input type="password" id="confirm-password" placeholder="Confirm your password">
+                </div>
+                <button type="button" onclick="navigateToHomePage()">Sign Up</button>
+            </form>
+            <p>Already have an account? <button onclick="toggleForm()">Login</button></p>
+        </div>
+    </div>
+</div>
+
+<script>
+    function toggleForm() {
+        var loginForm = document.getElementById('login-form');
+        var signupForm = document.getElementById('signup-form');
+        loginForm.classList.toggle('hidden');
+        signupForm.classList.toggle('hidden');
+    }
+
+    function navigateToHomePage() {
+        window.location.href = 'home.html';
+    }
+</script>
+
+</body>
+</html>

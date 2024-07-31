@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MyCaseManager</title>
+    <link rel="stylesheet" href="homec.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="/client/css/create.css">
+    <link rel="stylesheet" href="/server/case.js">
+
+    <style>
+        /* External CSS  */
+    </style>
+</head>
+
+<body>
+
+    <!-- HTML for Navigation Bar -->
+    <div class="navbar">
+        <nav id="navbar">
+            <div id="logo">
+                <h5 style="color:white;">MyCaseManager</h5>
+                <img src="/images/mcmlogo.png" alt="carImage" height="100px" width="100px">
+            </div>
+            <ul>
+                <li class="items"><a href="/client/html/home.html">Home</a></li>
+                <li class="items"><a href="/client/html/about.html">About</a></li>
+                <li class="items"><a href="/client/html/contact.html">Contact</a></li>
+                <li class="items" style="position:absolute; right: 0px; font-size: 2rem; "><a
+                        href="login.html">Login</a></li>
+            </ul>
+    </div>
+    </div>
+    </nav>
+    </div>
+
+    <div class="add">
+        <form >
+            <h3>Create a New Cases</h3>
+            <div><label for="date">Date of Cases:</label></div>
+            <div><input type="date" name="date" id="date"></div>
+
+            <div><label for="caseNo">Case Number:</label></div>
+            <div><input type="text" name="caseNo" id="case-number" placeholder="Enter Case Number"></div>
+
+            <div><label for="party">Party Name:</label></div>
+            <div><input type="text" name="party" id="party-name" placeholder="Enter Party Names"></div>
+
+            <div><label for="status">Status :</label></div>
+            <div><input type="text" name="status" id="status" placeholder="Enter the status of Case's stage"></div>
+
+
+            <div id="notification"></div>
+            <button type="submit"  class="submit">Submit</button>
+            <p class="statusDemo"></p>
+        </form>
+
+    </div>
+
+    <script >
+        
+        document.addEventListener("DOMContentLoaded", async (e) => {
+            // e.preventDefault()
+            const submit = document.querySelector(".submit")
+            submit.addEventListener("click", async(e) =>{
+            e.preventDefault()
+            const   date = document.getElementById("date").value
+            const caseNumber = document.getElementById("case-number").value
+            const  partyName = document.getElementById("party-name").value
+            const status = document.getElementById("status").value
+
+            const bodyData = {
+                date : date,
+                caseNumber : caseNumber ,
+                partyName : partyName,
+                status : status
+
+            } 
+          try{
+            const res = await fetch("http://localhost:3000", {
+            method: "POST",
+            mode: "cors",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(bodyData),
+          });
+
+          document.querySelector(".statusDemo").innerHTML = "your case has been successfully uploaded"
+          window.location.href = "/client/html/case.html";
+
+          }
+          catch(e){
+            console.log(e)
+          }
+
+          const response = await res.json();
+          console.log(response)
+         })
+        })
+
+
+
+    </script>
+
+</body>
+
+<footer>
+
+</footer>

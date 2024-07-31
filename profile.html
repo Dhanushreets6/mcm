@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MyCaseManager</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="/client/css/home.css">
+    <link rel="stylesheet" href="/client/css/profile.css">
+
+    <style>
+        /* External CSS  */
+    </style>
+</head>
+
+<body>
+
+    <!-- HTML for Navigation Bar -->
+    <div class="navbar">
+        <nav id="navbar">
+            <div id="logo">
+                <h5 style="color:white;">MyCaseManager</h5>
+                <img src="/images/mcmlogo.png" alt="BookImage" height="100px" width="100px">
+                
+            </div>
+            <ul>
+                <li class="active"><a href="/client/html/home.html">Home</a></li>
+                <li class="items"><a href="/client/html/about.html">About</a></li>
+                <li class="items"><a href="/client/html/contact.html">Contact</a></li>
+                <li class="items" style="position:absolute; right: 0px; font-size: 2rem; "><a
+                        href="profile.html">Profile</a></li>
+            </ul>
+    </div>
+    </div>
+    </nav>
+    </div>
+    <div id="home">
+        <div class="homecar">
+
+    <div class="profile-container">
+        <h2>Profile</h2>
+        <div class="profile-photo">
+            <img src="blank-profile.jpeg" alt="Profile Photo" id="preview">
+        </div>
+        <br><br>
+        <form id="Profile">
+            <div class="profile-photo">
+                <input type="file" name="profile-photo" accept="image/*" onchange="previewPhoto(event)">
+            </div>
+            <div class="input-group">
+                <label for="username">Name</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <div class="input-group">
+                <label for="Phone no">Phone No</label>
+                <input type="tel" id="Phone no" name="Phone no" required>
+            </div>
+            <div class="input-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="input-group">
+                <label for="specialization">Specialization</label>
+                <select name="specialization" id="specialization">
+                    <option value="Civil">Civil</option>
+                    <option value="Criminal">Criminal</option>
+                    <option value="Cyber">Cyber</option>
+                    <option value="Intellectual Property">Intellectual Property</option>
+                </select>
+            </div>
+            <div class="input-group">
+                <label for="court">Court</label>
+                <select name="court" id="court">
+                    <option value="supreme">Supreme Court</option>
+                    <option value="high">High Court</option>
+                    <option value="district">District and sessions Court</option>
+                    <option value="lok adalats">Lok Adalats</option>
+                </select>
+            </div>
+            <div class="input-group">
+                <label for="district">District</label>
+                <select name="district" id="district">
+                    <option value="Bagalkot">Bagalkot</option>
+                    <option value="Bengaluru Urban">Bengaluru Urban</option>
+                    <option value="Bengaluru Rural">Bengaluru Rural</option>
+                    <option value="Belagavi">Belagavi</option>
+                    <option value="Bellary">Bellary</option>
+                    <option value="Bidar">Bidar</option>
+                    <option value="Vijayapura">Vijayapura</option>
+                    <option value="Chamarajanagar">Chamarajanagar</option>
+                    <option value="Chikballapur">Chikballapur</option>
+                    <option value="Chikkamagaluru">Chikkamagaluru</option>
+                    <option value="Chitradurga">Chitradurga</option>
+                    <option value="Dakshina Kannada">Dakshina Kannada</option>
+                    <option value="Davanagere">Davanagere</option>
+                    <option value="Dharwad">Dharwad</option>
+                    <option value="Gadag">Gadag</option>
+                    <option value="Kalaburagi">Kalaburagi</option>
+                    <option value="Hassan">Hassan</option>
+                    <option value="Haveri">Haveri</option>
+                    <option value="Kodagu">Kodagu</option>
+                    <option value="Kolar">Kolar</option>
+                    <option value="Koppal">Koppal</option>
+                    <option value="Mandya">Mandya</option>
+                    <option value="Mysuru">Mysuru</option>
+                    <option value="Raichur">Raichur</option>
+                    <option value="Ramanagara">Ramanagara</option>
+                    <option value="Shivamogga">Shivamogga</option>
+                    <option value="Tumakuru">Tumakuru</option>
+                    <option value="Udupi">Udupi</option>
+                    <option value="Uttara Kannada">Uttara Kannada</option>
+                    <option value="Yadgir">Yadgir</option>
+                </select>
+            </div>
+            <div class="cta-buttons">
+                <div class="cta-button"><a href="/client/html/home.html">Back</a></div>
+                <div class="cta-button"><a href="edit">Edit</a></div>
+            </div>
+        </form>
+        <script>
+
+        function previewPhoto(event) {
+        var input = event.target;
+         var reader = new FileReader();
+        reader.onload = function() {
+          var img = document.getElementById('preview');
+        img.src = reader.result;
+    };
+    reader.readAsDataURL(input.files[0]);
+  }
+        </script>
+    </div>
+    </div>
+
+</div>
+</body>
+</html>

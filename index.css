@@ -1,0 +1,212 @@
+* {
+  font-family: "Outfit", sans-serif;
+}
+
+
+body {
+  margin: 0;
+  font-family: "Times New Roman", Times, serif;
+  background-color: #ced4da;
+  background-image: url("/images/image5.webp");
+  background-repeat: no-repeat;
+  background:cover ;
+  background-size: cover;
+  
+}
+
+.navbar {
+  background-color: #adb5bd;
+  overflow: hidden;
+}
+
+.navbar a {
+  display: flex;
+  display: block;
+  color: rgb(112 48 66);
+  text-align: center;
+  padding: 14px 20px;
+  text-decoration: none;
+}
+
+.navbar a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.navbar a.active {
+  background-color: #adb5bd;
+}
+
+#navbar {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+}
+
+/* Logo and images */
+#logo {
+  margin: 10px 30px;
+  height: 200px;
+}
+
+#logo img {
+  margin: 4px 4px;
+  height: 100%;
+  width: 100%;
+  object-fit: contain;
+  color :white;
+}
+
+/* Navigation bar: list styling */
+
+#navbar ul {
+  display: flex;
+}
+
+#navbar ul li {
+  list-style: none;
+  font-size: 2rem;
+}
+
+
+#navbar::before {
+  content: "";
+  background-color: black;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0px;
+  left: 0px;
+  z-index: -1;
+  opacity: 0.2;
+}
+
+
+#navbar ul li a:hover,
+#navbar ul li a:active {
+  color: rgb(48, 36, 36);
+}
+
+#navbar ul li a {
+  display: block;
+  padding: 4px 22px;
+  border-radius: 20px;
+  text-decoration: none;
+  color: rgb(255 255 255);
+  font-weight: 400;
+}
+
+
+/* Welcome message styles */
+.welcome-container {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+/* Main content area styles */
+.main-content {
+  background-color: #f3f4f6;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 1rem;
+}
+
+/* Login container styles */
+.login-container {
+  background-color: #fff;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 0.5rem;
+  padding: 2rem;
+  width: 24rem;
+}
+
+/* Form styles */
+.login-form,
+.signup-form {
+  margin-top: 1rem;
+}
+
+.login-form,
+.signup-form form {
+  display: flex;
+  flex-direction: column;
+}
+
+.login-form label,
+.signup-form label {
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
+.login-form input,
+.signup-form input {
+  padding: 0.75rem;
+  margin-bottom: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 0.25rem;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+}
+
+.login-form input:focus,
+.signup-form input:focus {
+  outline: none;
+  border-color: #4a90e2;
+}
+
+/* Button styles */
+.login-form button,
+.signup-form button {
+  background-color: #4a90e2;
+  color: #fff;
+  border: none;
+  padding: 0.75rem;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+.login-form button:hover,
+.signup-form button:hover {
+  background-color: #357bd8;
+}
+
+/* Toggle link styles */
+.login-form p,
+.signup-form p {
+  text-align: center;
+  margin-top: 1rem;
+  font-size: 0.875rem;
+  color: #666;
+}
+
+.login-form p button,
+.signup-form p button {
+  background: none;
+  border: none;
+  color: #4a90e2;
+  cursor: pointer;
+}
+
+.login-form p button:hover,
+.signup-form p button:hover {
+  text-decoration: underline;
+}
+
+
+
+  footer {
+    background-color: #adb5bd;
+    color: White;
+    position:fixed;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    padding:4px;
+  }
